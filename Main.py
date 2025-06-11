@@ -6,16 +6,8 @@ Main.py
 import sys
 import time
 
+import Func
 from Studio import *
-
-TPASS_city = ["基北北桃生活圈", "桃竹竹苗生活圈", "中彰投苗生活圈", "南高屏生活圈", "北宜生活圈", "花蓮縣", "雲林縣", "臺東縣：臺東縣都市內 $299", "大嘉義生活圈：嘉義縣市跨城際 $399"]  # 城市選擇平臺
-KPPT_type = ["基北北桃跨城際 $1,200", "基隆市都市內 $288"]
-TCCM_type = ["桃竹竹苗跨城際 $1,200", "桃竹竹跨城際 $799", "竹竹苗跨城際 $699", "竹竹跨城際 $288"]
-CCTM_type = ["中彰投苗跨城際 臺中市民 $699", "中彰投苗跨城際 非臺中市民 $999", "臺中市都市內 臺中市民 $299", "臺中市都市內 非臺中市民 $599", "彰化縣都市內 $699", "南投縣都市內 $699"]
-NKP_type = ["南高屏跨城際 $999", "臺南市都市內 $299", "臺南市都市內 含臺鐵 $399", "高雄市都市內 $399", "屏東縣都市內 $299", "屏東縣都市內 含臺鐵 $399"]
-BY_type = ["北宜跨城際及雙北 $2,300", "北宜跨城際 $1,800", "宜蘭縣都市內 $750"]
-HL_type = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]
-YL_type = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]
 
 if __name__ == "__main__":
     # 定義 中／英 程式名稱、程式版本號，如果日後有需要更新時，更改此處即可避免缺失遺漏
@@ -24,12 +16,53 @@ if __name__ == "__main__":
     version = "0.UNKNOWN.UNKNOWN"
 
     print("歡迎您使用「{}」Ver{}，本程式由 CHE_72 ZStudio 製作".format(program_zh, version))  # 輸出中文程式名稱、程式版本號、工作室名稱
-    print("\033[38;5;208m本程式可用來協助您分析購買「TPASS 通勤月票」是否划算，並使用將結果儲存在 \"TPASS_Result.txt\" 中。\033[0m")  # 輸出中文程式目的
+    print("\033[38;5;208m本程式可用來協助您分析購買「TPASS 通勤月票」是否划算，並將結果儲存在 \"TPASS_Result.txt\" 中。\033[0m")  # 輸出中文程式目的
     print("\033[38;5;208m以下所有問題請依照提示輸入「半形阿拉伯數字」回答\033[0m\n")  # 輸出中文使用提示，避免使用者誤用全形數字或中文數字
     print("\033[38;5;197m本程式目前正在開發中，敬請期待\033[0m\a\n")  # 輸出中文使用提示，避免使用者誤用全形數字或中文數字
-    print("「{}」Ver{}，著作權所有 (C) 2025-現在 CHE_72 ZStudio".format(program_zh, version))
-    print("{} Ver{} , Copyright (C) 2025-present CHE_72 ZStudio".format(program_en, version))
-    print(Studio_ZH)  # Studio.py 中的中文版工作室宣告
+
+    while True:
+        print("這裡是「功能選擇平臺」，請選擇您要使用的功能")
+        print("0：顯示使用說明、1：開始計算分析、6：顯示開源許可（英文原版）、7：顯示開源許可（中文翻譯）、8：顯示作者宣告、9：結束程式運行")
+        func = -1  # 「功能選擇平臺」的功能變數
+
+        try:  # 讀取使用者輸入至時間變數，並嘗試轉換成整數
+            func = int(input())
+        except ValueError:  # 如果使用者輸入無法轉換成整數的內容
+            print("\033[38;5;197m您的輸入內容出現錯誤，請檢查後輸入正確選項，現正返回「功能選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
+            continue  # 返回「功能選擇平臺」
+        else:
+            match func:  # 根據功能變數判斷，切換不同功能
+                case 0:  # 功能0：顯示使用說明
+                    pass
+                    # print(func_manual)  # 輸出「功能選擇平臺」簡易使用說明
+                case 1:  # 功能1：開始計算分析
+                    Func.analyze()
+                case 6:  # 功能6：顯示開源許可（英文原版）
+                    # 嘗試開啟 LICENSE 檔案為 gpl 句柄，否則輸出錯誤訊息並取消印出開源許可
+                    try:
+                        with open("LICENSE", "r", encoding="UTF-8") as gpl:
+                            for line in gpl:
+                                print(line, end="")
+                    except FileNotFoundError:
+                        print("\033[38;5;197m開啟 \"LICENSE\" 時出現錯誤，請檢查資料夾內是否包含此檔案")
+                case 7:  # 功能7：顯示開源許可（中文翻譯）
+                    # 嘗試開啟 LICENSE_ZH 檔案為 gpl 句柄，否則輸出錯誤訊息並取消印出開源許可
+                    try:
+                        with open("LICENSE_ZH", "r", encoding="UTF-8") as gpl:
+                            for line in gpl:
+                                print(line, end="")
+                    except FileNotFoundError:
+                        print("\033[38;5;197m開啟 \"LICENSE_ZH\" 時出現錯誤，請檢查資料夾內是否包含此檔案")
+                case 8:  # 功能8：顯示作者宣告
+                    print("「{}」Ver{}，著作權所有 (C) 2025-現在 CHE_72 ZStudio".format(program_zh, version))
+                    print("{} Ver{} , Copyright (C) 2025-present CHE_72 ZStudio".format(program_en, version))
+                    print(Studio_ZH)  # Studio.py 中的中文版工作室宣告
+                case 9:  # 功能9：結束程式運行
+                    print("\n\033[38;5;197m收到您的要求，正在結束程序\033[0m\a\n")  # 輸出提示訊息與通知聲音
+                    sys.exit(0)  # 呼叫系統正常結束本程式運行
+                case _:  # 其他錯誤的功能選擇輸入
+                    print("\033[38;5;197m您的輸入內容出現錯誤，請檢查後重新輸入，現正返回「功能選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
+
     with open("TPASS_Result.txt", "a+", encoding="UTF-8") as result:
         pass
     sys.exit(0)  # 呼叫系統正常結束本程式運行
