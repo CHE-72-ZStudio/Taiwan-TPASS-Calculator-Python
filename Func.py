@@ -318,14 +318,14 @@ def analyze(program, ver):
             total += m
 
         for t in range(1, len(trans_list) - 1):
-            result += "  {}：{}次".format(trans_list[t], times_list[t])  # TODO 頓號
+            result += "  {}：{}次，共{:,}元".format(trans_list[t], times_list[t], amount[t])  # TODO 頓號
 
         if total < price:
-            result += "\n本月無須另外購買 TPASS 通勤月票，共計花費 {} 元".format(total)
+            result += "\n本月無須另外購買 TPASS 通勤月票，共計花費 {:,} 元".format(total)
         elif total == price:
-            result += "\n本月無論是否購買 TPASS 通勤月票，皆要花費 {} 元".format(price)
+            result += "\n本月無論是否購買 TPASS 通勤月票，皆要花費 {:,} 元".format(price)
         elif total > price:
-            result += "\n建議本月購買「{}」方案的 TPASS 通勤月票，可省下 {} 元".format(name, total - price)
+            result += "\n建議本月購買「{}」方案的 TPASS 通勤月票，可省下 {:,} 元".format(name, total - price)
         print(result)
 
 
