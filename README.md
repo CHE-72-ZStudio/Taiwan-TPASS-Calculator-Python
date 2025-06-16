@@ -26,7 +26,7 @@
     * Windows 10+ 64位元（2004 以上版本）搭配 [Windows 終端機 (Windows Terminal)](https://aka.ms/terminal)
         * Windows 11+ 已預裝 Windows 終端機，無須另外安裝
     
-    > Windows 開發者可以直接從 Releases 頁面直接下載 `VSPF-Win-X.Y.ZZ.zip`  
+    > Windows 開發者可以直接從 Releases 頁面直接下載 `TTCP-Win-X.Y.ZZ.zip`  
      因程式尚未實作完成，目前不建議一般的 Windows 使用者下載運行本程式，敬請期待將來 Ver1.0.0 的發布，詳情可見「未來功能」區塊
 
 - Apple macOS / Linux
