@@ -17,18 +17,19 @@ HL_type = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]
 YL_type = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]
 
 
-def print_list(content_list):
+def print_list(content_list, offset=0):  # TODO more Pythonic?
     """
-    用於遍歷印出列表，並能顯示中文頓號與輸入用箭頭
+    公開函數：用於遍歷印出列表，並能顯示中文頓號與輸入用箭頭
 
     參數：
         * content_list (list)：要被遍歷印出的列表資料
+        * offset (int, optional)：在印出數值時的偏移量，預設為 0 表示不偏移，「類別選擇平臺」為 1 以適應類別編號
     """
     for i in range(len(content_list)):
         if i == len(content_list) - 1:  # 如果是列表中的最後一項
-            print("{}: {}\n--> \033[0m".format(i, content_list[i]), end='')  # 印出編號、列表文字與箭頭，準備讓使用者輸入
+            print("{}: {}\n".format(i + offset, content_list[i]), end='')  # 印出編號與列表文字
         else:
-            print("\033[38;5;43m{}: {}".format(i, content_list[i]), end='、')  # 印出編號與列表文字，以頓號分隔元素
+            print("\033[38;5;43m{}: {}".format(i + offset, content_list[i]), end='、')  # 印出編號與列表文字，以頓號分隔元素
 
 
 def analyze():
