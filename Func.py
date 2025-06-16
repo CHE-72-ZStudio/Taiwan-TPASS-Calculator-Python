@@ -72,6 +72,7 @@ def analyze():
     用於 Main.py 呼叫的分析函數，也是本程式的核心分析邏輯部分
     """
     while True:
+        city = -1
         try:
             print("\n這裡是「都會選擇平臺」，請選擇您經常通勤的生活圈")  # 輸出「都會選擇平臺」的提示訊息
             print_list(TPASS_city)  # 呼叫列表印出函式，印出「都會選擇平臺」的選單列表
@@ -90,23 +91,37 @@ def analyze():
             case 0:  # 城市0：顯示使用說明
                 pass
             case 1:  # 城市1：基北北桃生活圈
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(KPPT_type, 1)  # 呼叫列表印出函式，印出「基北北桃生活圈」的選單列表
+                type = check_input("--> \033[0m", 1, len(KPPT_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 2:  # 城市2：桃竹竹苗生活圈
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(TCCM_type, 1)  # 呼叫列表印出函式，印出「桃竹竹苗生活圈」的選單列表
+                type = check_input("--> \033[0m", 1, len(TCCM_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 3:  # 城市3：中彰投苗生活圈
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(CCTM_type, 1)  # 呼叫列表印出函式，印出「中彰投苗生活圈」的選單列表
+                type = check_input("--> \033[0m", 1, len(CCTM_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 4:  # 城市4：南高屏生活圈
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(NKP_type, 1)  # 呼叫列表印出函式，印出「南高屏生活圈」的選單列表
+                type = check_input("--> \033[0m", 1, len(NKP_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 5:  # 城市5：北宜生活圈
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(BY_type, 1)  # 呼叫列表印出函式，印出「北宜生活圈」的選單列表
+                type = check_input("--> \033[0m", 1, len(BY_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 6:  # 城市6：花蓮縣
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(HL_type, 1)  # 呼叫列表印出函式，印出「花蓮縣」的選單列表
+                type = check_input("--> \033[0m", 1, len(HL_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 7:  # 城市7：雲林縣
-                pass
+                print("\n您選擇了 {}，請選擇您想要分析的月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
+                print_list(YL_type, 1)  # 呼叫列表印出函式，印出「雲林縣」的選單列表
+                type = check_input("--> \033[0m", 1, len(YL_type))  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至方案變數，依序傳入 詢問內容、最小數值、最大數值
             case 8:  # 城市8：臺東縣：臺東縣都市內 $299
-                pass
+                print("\n您選擇了 {} 月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
             case 9:  # 城市9：大嘉義生活圈：嘉義縣市跨城際 $399
-                pass
+                print("\n您選擇了 {} 月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
             case 10:  # 城市10：返回上層選單
                 print("\033[38;5;43m正在返回「功能選擇平臺」\033[0m\n\a")  # 輸出提示訊息與通知聲音
                 return  # 回到「功能選擇平臺」
