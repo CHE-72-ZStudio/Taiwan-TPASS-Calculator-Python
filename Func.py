@@ -17,6 +17,34 @@ HL_type = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]
 YL_type = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]
 
 
+def check_input(prompt, range_min=None, range_max=None):
+    """
+    公開函數：讀取使用者輸入的內容，轉換成整數並進行範圍驗證，在輸入無效或超出範圍時會拋出例外
+    由 Gemini Code Assist 提供建議，符合 DRY 原則
+
+    參數：
+        * prompt (str)：顯示給使用者的提示訊息
+        * range_min (int, optional)：範圍內允許出現的最小值
+        * range_max (int, optional)：範圍內允許出現的最大值
+
+    回傳：
+        * value (int)：通過驗證的整數輸入
+
+    拋出：
+        * ValueError：如果輸入無法轉換為整數時自動拋出的內建例外
+        * RangeError：如果輸入超出指定的範圍時手動拋出的自訂例外
+    """
+    value = int(input(prompt))  # 讀取使用者輸入後嘗試轉換成整數，若無法轉換會自動拋出 ValueError
+
+    # 如果有傳入 最小／最大值，則檢查使用者輸入是否超出範圍，若超出範圍會手動拋出自訂的 RangeError 例外，表示數值超出合理範圍
+    if range_min is not None and value < range_min:
+        raise RangeError
+    if range_max is not None and value > range_max:
+        raise RangeError
+
+    return value  # 回傳正確轉換成整數的數值
+
+
 def print_list(content_list, offset=0):  # TODO more Pythonic?
     """
     公開函數：用於遍歷印出列表，並能顯示中文頓號與輸入用箭頭
