@@ -41,7 +41,7 @@ if __name__ == "__main__":
                     pass
                     # print(func_manual)  # 輸出「功能選擇平臺」簡易使用說明
                 case 1:  # 功能1：開始計算分析
-                    Func.analyze()
+                    Func.analyze(program_zh, version)
                 case 6:  # 功能6：顯示開源許可（英文原版）
                     # 嘗試開啟 LICENSE 檔案為 gpl 句柄，否則輸出錯誤訊息並取消印出開源許可
                     try:
