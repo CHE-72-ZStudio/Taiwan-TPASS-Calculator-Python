@@ -3,6 +3,7 @@ Func.py
 """
 
 import sys
+import time
 
 TPASS_city = ["顯示使用說明", "基北北桃生活圈", "桃竹竹苗生活圈", "中彰投苗生活圈", "南高屏生活圈", "北宜生活圈", "花蓮縣", "雲林縣",
               "澎湖縣", "臺東縣：臺東縣都市內 $299", "大嘉義生活圈：嘉義縣市跨城際 $399", "返回上層選單", "結束程式運行"]  # 城市選擇平臺
@@ -90,7 +91,7 @@ def print_list(content_list, offset=0):  # TODO more Pythonic?
             print("\033[38;5;43m{}: {}".format(i + offset, content_list[i]), end='、')  # 印出編號與列表文字，以頓號分隔元素
 
 
-def analyze():
+def analyze(name, ver):
     """
     用於 Main.py 呼叫的選單函數，用於選擇不同的生活圈與具體的月票方案後，呼叫 calculate 函數
     也是本程式的核心分析邏輯部分
@@ -186,6 +187,7 @@ def analyze():
                         case 1:  # 月票1：北宜跨城際及雙北 $2,300  # TODO:UNKNOWN
                             trans = ["結束輸入，開始計算", "北宜通勤國道客運", "臺灣鐵路", "宜蘭縣 市區公車", "結束程式運行"]
                             price = 2300
+                            continue  # 由於信息不完整，直接跳過本方案的計算，回到「都會選擇平臺」
                         case 2:  # 月票2：北北宜跨城際通勤 $1,800
                             trans = ["結束輸入，開始計算", "臺灣鐵路", "公路客運", "宜蘭縣 市區公車", "結束程式運行"]
                             price = 1800
@@ -219,6 +221,7 @@ def analyze():
                         case 2:  # 月票2：澎湖縣車船 $1000  #TODO 400?
                             trans = ["結束輸入，開始計算", "澎湖縣 市區公車", "馬公-望安-七美 交通船", "結束程式運行"]
                             price = 1000
+                    continue  # 由於信息不完整，直接跳過本方案的計算，回到「都會選擇平臺」
                 case 9:  # 城市9：臺東縣：臺東縣都市內 $299
                     print("\n您選擇了 {} 月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
                     trans = ["結束輸入，開始計算", "臺東縣 市區公車", "臺灣鐵路", "公路客運", "結束程式運行"]
@@ -244,11 +247,23 @@ def analyze():
             continue  # 回到「都會選擇平臺」
 
         # 直接將 calculate() 的邏輯接在這裡？使用參數 trans(list) price(int)
+        total, result = 0, ""
+        if total < price:
+            result += "本月無須另外購買 TPASS 通勤月票，共計花費 {} 元".format(total)
+        elif total == price:
+            result += "本月無論是否購買 TPASS 通勤月票，皆要花費 {} 元".format(price)
+        elif total > price:
+            result += "建議本月購買 {} 方案的 TPASS 通勤月票，可省下 {} 元".format("", total - price)
+        print(result)
 
 
         # 直接將 output() 的邏輯接在這裡？
         try:
             with open("TPASS_Result.txt", "a+", encoding="UTF-8") as file:
-                pass
+                time_stamp = time.localtime()
+                file.write("{}-{}-{} {}:{}\n".format(time_stamp.tm_year, time_stamp.tm_mon, time_stamp.tm_mday, time_stamp.tm_hour, time_stamp.tm_min))
+                file.write("{}\n".format(result))
+                file.write("「{}」Ver{}\n".format(name, ver))
+                file.write("{}\n".format("=" * 36))
         except:
-            pass
+            print("encounter some errors when trying to write \"TPASS_Result.txt\"")
