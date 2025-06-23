@@ -298,7 +298,7 @@ def analyze(program, ver):
                             if times == 0:
                                 break
                             times_list[trans] += times
-                            amount += times * money
+                            amount[trans] += times * money
 
             except RangeError:  # 如果使用者輸入超出正常範圍的內容
                 print("\033[38;5;197m您的輸入內容超出合理範圍，請檢查後輸入正確內容，現正返回「交通選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
@@ -313,7 +313,6 @@ def analyze(program, ver):
 
         # 直接將 calculate() 的邏輯接在這裡？使用參數 trans_list(list) price(int)
         total, result = 0, "本月共搭乘："
-        print(amount)
         for m in amount:
             total += m
 
