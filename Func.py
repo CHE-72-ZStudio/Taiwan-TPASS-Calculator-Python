@@ -186,9 +186,10 @@ def analyze(program, ver):
                 case 5:  # 城市5：北宜生活圈
                     plan, name = _plan_input(city, BY_plan)
                     match plan:
-                        case 1:  # 月票1：北宜跨城際及雙北 $2,300  # TODO:UNKNOWN
+                        case 1:  # 月票1：北宜跨城際及雙北 $2,300  # TODO: Search for Official Info.
                             trans_list = ["結束輸入，開始計算", "北宜通勤國道客運", "臺灣鐵路", "臺北捷運", "大臺北地區 市區公車", "宜蘭縣 市區公車", "結束程式運行"]
                             price = 2300
+                            print("\033[38;5;197m由於缺少官方完整資訊，目前無法計算「北宜跨城際及雙北 $2,300」的月票方案\033[0m\a\n")  # 輸出提示訊息與通知聲音
                             continue  # 由於信息不完整，直接跳過本方案的計算，回到「都會選擇平臺」
                         case 2:  # 月票2：北北宜跨城際通勤 $1,800
                             trans_list = ["結束輸入，開始計算", "臺灣鐵路", "公路客運", "宜蘭縣 市區公車", "結束程式運行"]
@@ -214,15 +215,16 @@ def analyze(program, ver):
                         case 2:  # 月票2：雲林縣都市內 含臺鐵跨區7站 $399
                             trans_list = ["結束輸入，開始計算", "雲林縣 市區公車", "臺灣鐵路（含 彰化/嘉義 跨區 7 站）", "公路客運", "結束程式運行"]
                             price = 399
-                case 8:  # 城市8：澎湖縣
+                case 8:  # 城市8：澎湖縣  # TODO: Search for Official Info.
                     plan, name = _plan_input(city, PH_plan)
                     match plan:
-                        case 1:  # 月票1：澎湖縣公車 $210  # TODO 150?
+                        case 1:  # 月票1：澎湖縣公車 $210  # 150 or 210 ?
                             trans_list = ["結束輸入，開始計算", "澎湖縣 市區公車", "結束程式運行"]  # TODO 僅一種交通選擇，可以簡化
                             price = 210
-                        case 2:  # 月票2：澎湖縣車船 $1000  #TODO 400?
+                        case 2:  # 月票2：澎湖縣車船 $1000  # 400 or 1000 ?
                             trans_list = ["結束輸入，開始計算", "澎湖縣 市區公車", "馬公-望安-七美 交通船", "結束程式運行"]
                             price = 1000
+                    print("\033[38;5;197m由於缺少官方完整資訊，目前無法計算「澎湖縣」的所有月票方案\033[0m\a\n")  # 輸出提示訊息與通知聲音
                     continue  # 由於信息不完整，直接跳過本方案的計算，回到「都會選擇平臺」
                 case 9:  # 城市9：臺東縣：臺東縣都市內 $299
                     print("\n您選擇了 {} 月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
