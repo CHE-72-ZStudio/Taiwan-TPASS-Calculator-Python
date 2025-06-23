@@ -347,5 +347,6 @@ def analyze(program, ver):
         except:
             print("encounter some errors when trying to write \"TPASS_Result.txt\"")
         else:
-            print("write file successfully")
-            print("going back to city selection")
+            print("\033[38;5;47mwrite file successfully\033[0m")  # 輸出檔案成功寫入訊息  # TODO: CH
+        finally:
+            print("\033[38;5;43m正在返回「都會選擇平臺」\033[0m\n\a")  # 輸出提示訊息與通知聲音
