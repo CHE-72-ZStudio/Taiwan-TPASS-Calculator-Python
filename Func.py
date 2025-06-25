@@ -34,19 +34,19 @@ class RangeError(ValueError):
 
 def _plan_input(city, city_plan):
     """
-    內部函數：
+    內部函數：用於詢問使用者特定生活圈可用月票方案的「方案選擇平臺」，並回傳在該生活圈下，最終選擇的月票方案編號
 
     參數：
-        * city (int)：
-        * city_plan (list)：
+        * city (int)：使用者先前輸入的生活圈變數，用於從 TPASS_city[] 中讀取生活圈的名稱
+        * city_plan (list)：要讓使用者選擇的生活圈可用月票方案列表
 
     回傳：
-        * plan (int)：
-        * name (str)
+        * plan (int)：使用者最終選擇的月票方案編號，作為後續設定可用交通工具列表與月票購買金額時使用
+        * name (str)：使用者最終選擇的月票方案名稱，作為後續輸出計算結果時使用
 
     拋出：
-        * ValueError：
-        * RangeError：
+        * ValueError：如果輸入無法轉換為整數時自動拋出的內建例外（由 check_input() 傳播）
+        * RangeError：如果輸入超出指定的範圍時手動拋出的自訂例外（由 check_input() 傳播）
     """
     print("\n這裡是「方案選擇平臺」，請選擇您想要分析的 \033[38;5;43m{}\033[0m 月票方案".format(TPASS_city[city]))  # 輸出「通勤生活圈」的提示訊息
     print_list(city_plan, 1)  # 呼叫列表印出函式，印出「各城市生活圈」的選單列表
@@ -324,9 +324,9 @@ def analyze(program, ver):
             result += "  {}：{}次，共{:,}元".format(trans_list[t], times_list[t], amount[t])  # TODO 頓號
 
         if total < price:
-            result += "\n本月無須另外購買 TPASS 通勤月票，共計花費 {:,} 元".format(total)
+            result += "\n本月無須另外購買「{}」方案的 TPASS 通勤月票，共計花費 {:,} 元".format(name, total)
         elif total == price:
-            result += "\n本月無論是否購買 TPASS 通勤月票，皆要花費 {:,} 元".format(price)
+            result += "\n本月無論是否購買「{}」方案的 TPASS 通勤月票，皆要花費 {:,} 元".format(name, price)
         elif total > price:
             result += "\n建議本月購買「{}」方案的 TPASS 通勤月票，可省下 {:,} 元".format(name, total - price)
         print(result)
