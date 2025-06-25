@@ -334,15 +334,16 @@ def analyze(program, ver):
 
         # 直接將 output() 的邏輯接在這裡？
         try:
+            # 由 Gemini Code Assist 提供時間戳記缺位自動補 0 的方法
             with open("TPASS_Result.txt", "a+", encoding="UTF-8") as file:
                 stamp = time.localtime()
-                file.write("{}-{}-{} {}:{}\n".format(stamp.tm_year, stamp.tm_mon, stamp.tm_mday, stamp.tm_hour, stamp.tm_min))
+                file.write("{:04d}-{:02d}-{:02d} {:02d}:{:02d}\n".format(stamp.tm_year, stamp.tm_mon, stamp.tm_mday, stamp.tm_hour, stamp.tm_min))
                 file.write("{}\n".format(result))
                 file.write("「{}」Ver{}\n".format(program, ver))
                 file.write("{}\n".format("=" * 36))
         except:
-            print("encounter some errors when trying to write \"TPASS_Result.txt\"")
+            print("\033[38;5;197m程式將結果寫入至 \"TPASS_Result.txt\" 時遇到一些錯誤，無法完成檔案的寫入\033[0m\a")  # 輸出檔案無法寫入訊息與通知聲音
         else:
-            print("\033[38;5;47mwrite file successfully\033[0m")  # 輸出檔案成功寫入訊息  # TODO: CH
+            print("\033[38;5;47m成功將計算結果寫入至 \"TPASS_Result.txt\"，可於日後開啟該檔案檢視結果\033[0m")  # 輸出檔案成功寫入訊息
         finally:
             print("\033[38;5;43m正在返回「都會選擇平臺」\033[0m\n\a")  # 輸出提示訊息與通知聲音
