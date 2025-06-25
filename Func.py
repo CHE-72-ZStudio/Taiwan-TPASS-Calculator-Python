@@ -38,7 +38,7 @@ def _plan_input(city, city_plan):
 
     參數：
         * city (int)：使用者先前輸入的生活圈變數，用於從 TPASS_city[] 中讀取生活圈的名稱
-        * city_plan (list)：要讓使用者選擇的生活圈可用月票方案列表
+        * city_plan (list)：讓使用者選擇的生活圈可用月票方案列表
 
     回傳：
         * plan (int)：使用者最終選擇的月票方案編號，作為後續設定可用交通工具列表與月票購買金額時使用
@@ -114,7 +114,8 @@ def analyze(program, ver):
 
             match city:
                 case 0:  # 城市0：顯示使用說明
-                    pass
+                    print(func_manual)  # 印出「計算分析函式」的使用說明
+                    continue  # 回到「都會選擇平臺」
                 case 1:  # 城市1：基北北桃生活圈
                     plan, name = _plan_input(city, KPPT_plan)  # 呼叫 _plan_input() 函數取得月票方案與名稱，依序傳入生活圈編號與可用月票方案
                     match plan:
@@ -256,7 +257,7 @@ def analyze(program, ver):
             continue  # 回到「都會選擇平臺」
 
         amount, times_list = [0 for t in range(len(trans_list))], [0 for t in range(len(trans_list))]
-        tp_metro_original = 0  # 另外設定 臺北捷運+環狀線 的原始票價，避免因重複輸入與計算常客優惠後出現的總金額錯誤
+        tp_metro_original = 0  # 另外保留 臺北捷運+環狀線 的原始花費，避免因重複輸入與計算常客優惠後出現總金額錯誤的問題
 
         # 使用無窮迴圈，直到用戶選擇「輸入完成」或「結束程式」才能離開迴圈
         # TODO 新增輸入完成後的回應
@@ -283,7 +284,7 @@ def analyze(program, ver):
                             times_list[trans] += times
                             tp_metro_original += times * m
 
-                        # 計算 臺北捷運+環狀線 的常客優惠價格後存入列表中，避免修改原始票價數值
+                        # 計算 臺北捷運+環狀線 的常客優惠價格後存入列表中對應位置，避免修改原始票價數值
                         if 11 <= times_list[trans] <= 20:
                             amount[trans] = tp_metro_original * 0.95
                         elif 21 <= times_list[trans] <= 40:
@@ -335,11 +336,11 @@ def analyze(program, ver):
         for m in amount:
             total += m
 
-        # 輸出各個交通工具詳細的搭乘次數與個別總和
+        # 儲存各個交通工具詳細的搭乘次數與個別總和
         for t in range(1, len(trans_list) - 1):
-            result += "  {}：{}次，共{:,}元".format(trans_list[t], times_list[t], amount[t])  # TODO 頓號
+            result += "  {}：{}次，共{:,}元".format(trans_list[t], times_list[t], amount[t])  # TODO 頓號、
 
-        # 比較通勤花費與月票金額，判斷是否建議購買 TPASS 通勤月票與最終花費
+        # 比較通勤花費與月票金額，判斷是否建議購買 TPASS 通勤月票與最終花費後輸出在 CLI 中
         if total < price:
             result += "\n本月無須另外購買「{}」方案的 TPASS 通勤月票，共計花費 {:,} 元".format(name, total)
         elif total == price:
@@ -350,9 +351,9 @@ def analyze(program, ver):
 
 
         # 直接將 output() 的邏輯接在這裡？
-        # 嘗試開啟 TPASS_Result.txt 為 file 句柄後，將時間戳記與計算結果寫入檔案中，方便使用者日後查詢
+        # 嘗試開啟 TPASS_Result.txt 為 file 句柄後，將 時間戳記、計算結果、程式版本、分隔符號 寫入檔案中，方便使用者日後查詢
         try:
-            # 由 Gemini Code Assist 提供時間戳記缺位自動補 0 的方法
+            # 由 Gemini Code Assist 提供可以在時間戳記的缺位中自動補 0 的方法
             with open("TPASS_Result.txt", "a+", encoding="UTF-8") as file:
                 stamp = time.localtime()
                 file.write("{:04d}-{:02d}-{:02d} {:02d}:{:02d}\n".format(stamp.tm_year, stamp.tm_mon, stamp.tm_mday, stamp.tm_hour, stamp.tm_min))
@@ -366,3 +367,5 @@ def analyze(program, ver):
             print("\033[38;5;47m成功將計算結果寫入至 \"TPASS_Result.txt\"，可於日後開啟該檔案檢視結果\033[0m")  # 輸出檔案成功寫入訊息
         finally:
             print("\033[38;5;43m正在返回「都會選擇平臺」\033[0m\n\a")  # 輸出提示訊息與通知聲音
+
+func_manual = ""  # TODO
