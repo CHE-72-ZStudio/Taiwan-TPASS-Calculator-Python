@@ -361,9 +361,10 @@ def analyze(program, ver):
                 file.write("「{}」Ver{}\n".format(program, ver))
                 file.write("{}\n".format("=" * 36))
         # TODO 增加磁碟空間已滿，無法寫入的專用 except 提示
-        # TODO 增加存取權限不足，無法寫入的專用 except 提示
-        except:
-            print("\033[38;5;197m程式將結果寫入至 \"TPASS_Result.txt\" 時遇到一些錯誤，無法完成檔案的寫入\033[0m\a")  # 輸出檔案無法寫入訊息與通知聲音
+        except PermissionError:  # 如果文件系統的存取權限不足
+            print("\033[38;5;197m因為程式對於文件系統的存取權限不足，無法將結果寫入至檔案內\033[0m\a")  # 輸出檔案權限不足訊息與通知聲音
+        except Exception:
+            print("\033[38;5;197m程式遇到不明原因的錯誤，無法將結果寫入至檔案內\033[0m\a")  # 輸出檔案無法寫入訊息與通知聲音
         else:
             print("\033[38;5;47m成功將計算結果寫入至 \"TPASS_Result.txt\"，可於日後開啟該檔案檢視結果\033[0m")  # 輸出檔案成功寫入訊息
         finally:
