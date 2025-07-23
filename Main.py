@@ -42,8 +42,7 @@ if __name__ == "__main__":
         else:
             match func:  # 根據功能變數判斷，切換不同功能
                 case 0:  # 功能0：顯示使用說明
-                    pass
-                    # print(func_manual)  # 輸出「功能選擇平臺」簡易使用說明
+                    print(func_manual)  # 輸出「功能選擇平臺」簡易使用說明
                 case 1:  # 功能1：開始計算分析
                     Func.analyze(program_zh, version)
                 case 6:  # 功能6：隱藏的小彩蛋
