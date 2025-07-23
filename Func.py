@@ -32,6 +32,11 @@ class RangeError(ValueError):
     pass
 
 
+if __name__ == "__main__":  # 如果使用者誤啟動本程式
+    print("\033[38;5;197m這是 Main.py 呼叫的模組\n請改為運行 Main.py，而非直接運行本程式\n我們即將結束此模組的運行\033[0m")  # 輸出提示訊息提醒使用者正確使用方式
+    exit(1)  # 呼叫系統結束本程式運行，原因為"Operation not permitted"
+
+
 def _plan_input(city, city_plan):
     """
     內部函數：用於詢問使用者特定生活圈可用月票方案的「方案選擇平臺」，並回傳在該生活圈下，最終選擇的月票方案編號
