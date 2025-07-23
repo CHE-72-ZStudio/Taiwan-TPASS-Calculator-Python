@@ -90,7 +90,7 @@ def print_list(content_list, offset=0):  # TODO more Pythonic?
 
     參數：
         * content_list (list)：要被遍歷印出的列表資料
-        * offset (int, optional)：在印出數值時的偏移量，預設為 0 表示不偏移，「類別選擇平臺」為 1 以適應類別編號
+        * offset (int, optional)：在印出數值時的偏移量，預設為 0 表示不偏移，「方案選擇平臺」為 1 以適應月票方案編號
     """
     for i in range(len(content_list)):
         if i == len(content_list) - 1:  # 如果是列表中的最後一項
@@ -171,7 +171,7 @@ def analyze(program, ver):
                     plan, name = _plan_input(city, NKP_plan)  # 呼叫 _plan_input() 函數取得月票方案與名稱，依序傳入生活圈編號與可用月票方案
                     match plan:
                         case 1:  # 南高屏月票1：南高屏跨城際 $999
-                            trans_list = ["輸入完成，開始計算", "臺南/高雄/屏東 市區公車", "高雄捷運", "高雄輕軌", "高雄渡輪", "臺灣鐵路", "公路客運", "結束程式運行"]  # TODO
+                            trans_list = ["輸入完成，開始計算", "臺南/高雄/屏東 市區公車", "高雄捷運", "高雄輕軌", "高雄渡輪", "臺灣鐵路", "公路客運", "結束程式運行"]
                             price = 999
                         case 2:  # 南高屏月票2：大臺南公車 $299
                             trans_list = ["輸入完成，開始計算", "大臺南公車", "結束程式運行"]  # TODO 僅一種交通選擇，可以簡化
@@ -180,7 +180,7 @@ def analyze(program, ver):
                             trans_list = ["輸入完成，開始計算", "大臺南公車", "臺灣鐵路", "結束程式運行"]
                             price = 399
                         case 4:  # 南高屏月票4：高雄市區 $399
-                            trans_list = ["輸入完成，開始計算", "高雄市 市區公車", "高雄捷運", "高雄輕軌", "高雄渡輪", "臺灣鐵路", "公路客運", "結束程式運行"]  # TODO
+                            trans_list = ["輸入完成，開始計算", "高雄市 市區公車", "高雄捷運", "高雄輕軌", "高雄渡輪", "臺灣鐵路", "公路客運", "結束程式運行"]
                             price = 399
                         case 5:  # 南高屏月票5：屏東縣公車暢行 $299
                             trans_list = ["輸入完成，開始計算", "屏東縣 市區公車", "公路客運", "結束程式運行"]
@@ -360,7 +360,8 @@ def analyze(program, ver):
                 file.write("{}\n".format(result))
                 file.write("「{}」Ver{}\n".format(program, ver))
                 file.write("{}\n".format("=" * 36))
-        # TODO 增加磁碟空間已滿，無法寫入的專用提示
+        # TODO 增加磁碟空間已滿，無法寫入的專用 except 提示
+        # TODO 增加存取權限不足，無法寫入的專用 except 提示
         except:
             print("\033[38;5;197m程式將結果寫入至 \"TPASS_Result.txt\" 時遇到一些錯誤，無法完成檔案的寫入\033[0m\a")  # 輸出檔案無法寫入訊息與通知聲音
         else:
