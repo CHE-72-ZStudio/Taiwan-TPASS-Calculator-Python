@@ -13,16 +13,16 @@ import time
 
 TPASS_city = ["顯示使用說明", "基北北桃生活圈", "桃竹竹苗生活圈", "中彰投苗生活圈", "南高屏生活圈", "北宜生活圈", "花蓮縣", "雲林縣",
               "澎湖縣", "臺東縣：臺東縣都市內 $299", "大嘉義生活圈：嘉義縣市跨城際 $399", "返回上層選單", "結束程式運行"]  # 城市選擇平臺
-KPPT_plan = ["基北北桃跨城際 成人 $1,200", "基北北桃跨城際 學生 $1,200", "基隆市都市內 $288"]
-TCCM_plan = ["桃竹竹苗跨城際 $1,200", "桃竹竹跨城際 $799", "竹竹苗跨城際 $699", "竹竹跨城際 $288"]
+KPPT_plan = ["基北北桃跨城際 成人 $1,200", "基北北桃跨城際 學生 $1,200", "基隆市都市內 $288"]  # 基北北桃生活圈的方案選擇平臺
+TCCM_plan = ["桃竹竹苗跨城際 $1,200", "桃竹竹跨城際 $799", "竹竹苗跨城際 $699", "竹竹跨城際 $288"]  #桃竹竹苗生活圈 的方案選擇平臺
 CCTM_plan = ["中彰投苗跨城際 臺中市民 $699", "中彰投苗跨城際 非臺中市民 $999", "臺中市都市內 臺中市民 $299",
-             "臺中市都市內 非臺中市民 $599", "彰化縣都市內 $699", "南投縣都市內 $699"]
+             "臺中市都市內 非臺中市民 $599", "彰化縣都市內 $699", "南投縣都市內 $699"]  # 中彰投苗生活圈的方案選擇平臺
 NKP_plan = ["南高屏跨城際 $999", "大臺南公車 $299", "大臺南公車+臺鐵 $399", "高雄市區 $399",
-            "屏東縣公車暢行 $299", "屏東縣無限暢行 $399", "高雄市公車暢遊（MeNGo 非 TPASS） $199"]
-BY_plan = ["北宜跨城際及雙北 $2,300", "北北宜跨城際通勤 $1,800", "宜蘭縣縣境內 $750"]
-HL_plan = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]
-YL_plan = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]
-PH_plan = ["澎湖縣公車 $150", "澎湖縣車船 $400"]
+            "屏東縣公車暢行 $299", "屏東縣無限暢行 $399", "高雄市公車暢遊（MeNGo 非 TPASS） $199"]  # 南高屏生活圈的方案選擇平臺
+BY_plan = ["北宜跨城際及雙北 $2,300", "北北宜跨城際通勤 $1,800", "宜蘭縣縣境內 $750"]  # 北宜生活圈的方案選擇平臺
+HL_plan = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]  # 花蓮縣的方案選擇平臺
+YL_plan = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]  # 雲林縣的方案選擇平臺
+PH_plan = ["澎湖縣公車 $150", "澎湖縣車船 $400"]  # 澎湖縣的方案選擇平臺
 
 
 class RangeError(ValueError):
@@ -113,7 +113,7 @@ def analyze(program, ver):
     while True:
         city = -1
         try:
-            print("\n這裡是「都會選擇平臺」，請選擇您經常通勤的生活圈")  # 輸出「都會選擇平臺」的提示訊息
+            print("\n這裡是「都會選擇平臺」，請選擇您經常通勤的 生活圈／縣市")  # 輸出「都會選擇平臺」的提示訊息
             print_list(TPASS_city)  # 呼叫列表印出函式，印出「都會選擇平臺」的選單列表
             city = check_input("--> \033[0m", 0, len(TPASS_city) - 1)  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至生活圈變數，依序傳入 詢問內容、最小數值、最大數值
 
@@ -265,7 +265,6 @@ def analyze(program, ver):
         tp_metro_original = 0  # 另外保留 臺北捷運+環狀線 的原始花費，避免因重複輸入與計算常客優惠後出現總金額錯誤的問題
 
         # 使用無窮迴圈，直到用戶選擇「輸入完成」或「結束程式」才能離開迴圈
-        # TODO 新增輸入完成後的回應
         while True:
             try:
                 print("\n這裡是「交通選擇平臺」，請選擇您要搭乘的大眾運輸工具")  # 輸出「交通選擇平臺」的提示訊息
@@ -281,7 +280,7 @@ def analyze(program, ver):
                         sys.exit(0)  # 呼叫系統正常結束本程式運行
                     case "臺北捷運+環狀線":  # 呼叫 臺北捷運+環狀線 專用輸入函式
                         print("\033[38;5;111m這裡是「數據輸入平臺」，請輸入您本月\033[38;5;43m「臺北捷運+環狀線」\033[38;5;111m的搭乘數據\033[0m")  # 輸出「數據輸入平臺」的提示訊息
-                        print("如果程式詢問金額沒有本月對應的搭乘次數，請輸入半形數字 0")
+                        print("\033[38;5;208m如果程式詢問金額沒有本月對應的搭乘次數，請輸入半形數字 0\033[0m")
 
                         # 使用 for 迴圈依序詢問從 $20 到 $65 捷運票價對應的搭乘次數
                         for m in range(20, 70, 5):
@@ -290,27 +289,31 @@ def analyze(program, ver):
                             tp_metro_original += times * m
 
                         # 計算 臺北捷運+環狀線 的常客優惠價格後存入列表中對應位置，避免修改原始票價數值
+                        # 由 Gemini Code Assist 提供建議，使用數學技巧進行四捨五入的計算，避免 math.round() 或 numpy.round() 的「銀行家捨入法」問題
                         if 11 <= times_list[trans] <= 20:
-                            amount[trans] = tp_metro_original * 0.95
+                            amount[trans] = int(tp_metro_original * 0.95 + 0.5)
                         elif 21 <= times_list[trans] <= 40:
-                            amount[trans] = tp_metro_original * 0.9
+                            amount[trans] = int(tp_metro_original * 0.9 + 0.5)
                         elif 41 <= times_list[trans]:
-                            amount[trans] = tp_metro_original * 0.85
+                            amount[trans] = int(tp_metro_original * 0.85 + 0.5)
                         else:
                             amount[trans] = tp_metro_original
 
+                        print("\033[38;5;45m程式已成功記下您本月共搭乘「臺北捷運+環狀線」NT$ {:,}（{:,} 次），常客優惠後為 NT$ {:,}\033[0m"
+                              .format(tp_metro_original, times_list[trans], amount[trans]))  # 輸出小結與回應訊息
                         print("\033[38;5;43m正在返回「交通選擇平臺」\033[0m\n")  # 輸出提示訊息
                     case "大臺北地區 市區公車":  # 呼叫 大臺北地區 市區公車 專用輸入函式
                         print("\033[38;5;111m這裡是「數據輸入平臺」，請輸入您本月\033[38;5;43m「大臺北地區 市區公車」\033[38;5;111m的搭乘數據\033[0m")  # 輸出「數據輸入平臺」的提示訊息
-                        print("如果程式詢問金額沒有本月對應的搭乘次數，請輸入半形數字 0")
+                        print("\033[38;5;208m如果程式詢問金額沒有本月對應的搭乘次數，請輸入半形數字 0\033[0m")
                         for m in bus_price:
                             times = check_input("請輸入您本月搭乘「大臺北地區 市區公車」NT${} 元的次數 ---> ".format(m), 0)  # 呼叫 check_input() 函數讀取與檢查使用者輸入後存放至次數變數，依序傳入 詢問內容、最小數值
                             times_list[trans] += times
                             amount[trans] += times * m
+                        print("\033[38;5;45m程式已成功記下您本月共搭乘「大臺北地區 市區公車」NT$ {:,}（{:,} 次）\033[0m".format(amount[trans], times_list[trans]))  # 輸出小結與回應訊息
                         print("\033[38;5;43m正在返回「交通選擇平臺」\033[0m\n")  # 輸出提示訊息
                     case _:  # 呼叫 一般輸入函式
                         print("\033[38;5;111m這裡是「數據輸入平臺」，請輸入您本月\033[38;5;43m「{}」\033[38;5;111m的搭乘數據\033[0m".format(trans_list[trans]))  # 輸出「數據輸入平臺」的提示訊息
-                        print("如果您已完成本交通工具的輸入，想要回到「交通選擇平臺」，請輸入半形數字 0")
+                        print("\033[38;5;208m如果您已完成本交通工具的輸入，請輸入半形數字 0 以回到「交通選擇平臺」\033[0m")
 
                         # 使用無窮迴圈，直到用戶輸入 0 才能離開迴圈，回到「交通選擇平臺」
                         while True:
@@ -325,40 +328,49 @@ def analyze(program, ver):
                             times_list[trans] += times
                             amount[trans] += times * money
 
+                        print("\033[38;5;45m程式已成功記下您本月搭乘「{}」NT$ {:,}（{:,} 次）\033[0m".format(trans_list[trans], amount[trans], times_list[trans]))  # 輸出小結與回應訊息
+
             except RangeError:  # 如果使用者輸入超出正常範圍的內容
                 print("\033[38;5;197m您的輸入內容超出合理範圍，請檢查後輸入正確內容，現正返回「交通選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
                 continue  # 回到「交通選擇平臺」
             except ValueError:  # 如果使用者輸入無法轉換成整數的內容
                 print("\033[38;5;197m您的輸入內容出現非整數的錯誤，請檢查後輸入正確選項，現正返回「交通選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
                 continue  # 回到「交通選擇平臺」
-            except Exception as e:  # 例外處理，捕捉其他未預期的錯誤
+            except Exception:  # 例外處理，捕捉其他未預期的錯誤
                 print("\033[38;5;197m您的輸入內容出現其他錯誤，請檢查後輸入正確選項，現正返回「交通選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
-                print(e)  # TODO: remove this after the test is done
                 continue  # 回到「交通選擇平臺」
 
         # 直接將 calculate() 的邏輯接在這裡？使用參數 trans_list(list) price(int)
-        total, result = 0, "本月共搭乘："
+        total, result = 0, "本月共搭乘「{}」的：\n\t".format(TPASS_city[city])
         for m in amount:
             total += m
 
-        # 儲存各個交通工具詳細的搭乘次數與個別總和
-        for t in range(1, len(trans_list) - 1):
-            result += "  {}：{}次，共{:,}元".format(trans_list[t], times_list[t], amount[t])  # TODO 頓號、
+        if total:  # 如果總票價不為 0
+            # 儲存各個交通工具詳細的搭乘次數與個別總和  # TODO 如果 amount[t]==0 時，則跳過不印出  # TODO more Pythonic?
+            for t in range(1, len(trans_list) - 1):
+                if t==len(trans_list) - 2:  # 如果是列表中的最後一項
+                    result += "{}：{:,} 次，共 {:,} 元".format(trans_list[t], times_list[t], amount[t])  # 印出 名稱、次數、金額
+                else:
+                    result += "{}：{:,} 次，共 {:,} 元、".format(trans_list[t], times_list[t], amount[t])  # 印出 名稱、次數、金額，以頓號分隔元素
 
-        # 比較通勤花費與月票金額，判斷是否建議購買 TPASS 通勤月票與最終花費後輸出在 CLI 中
-        if total < price:
-            result += "\n本月無須另外購買「{}」方案的 TPASS 通勤月票，共計花費 {:,} 元".format(name, total)
-        elif total == price:
-            result += "\n本月無論是否購買「{}」方案的 TPASS 通勤月票，皆要花費 {:,} 元".format(name, price)
-        elif total > price:
-            result += "\n建議本月購買「{}」方案的 TPASS 通勤月票，可省下 {:,} 元".format(name, total - price)
-        print(result)
+            # 比較通勤花費與月票金額，判斷是否建議購買 TPASS 通勤月票與最終花費後儲存在字串中，以供後續 CLI 輸出與檔案儲存使用
+            if total < price:
+                result += "\n本月無須另外購買「{}」方案的 TPASS 通勤月票，共計花費 {:,} 元".format(name, total)
+            elif total == price:
+                result += "\n本月無論是否購買「{}」方案的 TPASS 通勤月票，皆要花費 {:,} 元".format(name, price)
+            elif total > price:
+                result += "\n建議本月購買「{}」方案的 TPASS 通勤月票，可省下 {:,} 元".format(name, total - price)
+        else:
+            result = "本月沒有搭乘任何大眾運輸交通工具，不需要進行計算與分析"
+
+        print("\033[38;5;45m{}\033[0m".format(result))  # 在 CLI 中印出最終的分析結果，包含各交通工具搭乘數據與購買建議
 
 
         # 直接將 output() 的邏輯接在這裡？
         # 嘗試開啟 TPASS_Result.txt 為 file 句柄後，將 時間戳記、計算結果、程式版本、分隔符號 寫入檔案中，方便使用者日後查詢
         try:
             # 由 Gemini Code Assist 提供可以在時間戳記的缺位中自動補 0 的方法
+            # TODO: 改為將最新結果寫在檔案開頭，但不覆蓋原有資料與字元
             with open("TPASS_Result.txt", "a+", encoding="UTF-8") as file:
                 stamp = time.localtime()
                 file.write("{:04d}-{:02d}-{:02d} {:02d}:{:02d}\n".format(stamp.tm_year, stamp.tm_mon, stamp.tm_mday, stamp.tm_hour, stamp.tm_min))
@@ -377,7 +389,7 @@ def analyze(program, ver):
 
 
 analyze_manual = ("\033[38;5;208m\n「計算分析函式」使用說明\n"
-                  "都會選擇平臺：選擇您想要分析的通勤生活圈並輸入對應的半形數字\t0 顯示本則使用說明\t10 返回「功能選擇平臺」選單\t11 結束運行並退出程式\n"
+                  "都會選擇平臺：選擇您想要分析的通勤生活圈並輸入對應的半形數字\t0 顯示本則使用說明\t11 返回「功能選擇平臺」選單\t12 結束運行並退出程式\n"
                   "方案選擇平臺：在該通勤生活圈依據想要分析的月票方案輸入對應的半形數字\n"
                   "交通選擇平臺：依據想要搭乘的大眾運輸交通工具輸入對應的半形數字\t0 查看最終的計算結果\n"
                   "數據輸入平台：在此使用半形數字輸入該交通工具搭乘的票價與次數，程式會依照您的數據進行結果分析與購買推薦\n\033[0m")
