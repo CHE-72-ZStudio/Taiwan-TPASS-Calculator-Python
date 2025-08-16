@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # 定義 中／英 程式名稱、程式版本號，如果日後有需要更新時，更改此處即可避免缺失遺漏
     program_zh = "中華民國（臺灣）TPASS 通勤月票計算程式（Python）"
     program_en = "Taiwan TPASS Calculator (Python)"
-    version = "0.1.12"
+    version = "1.0.10"
 
     print("歡迎您使用「{}」Ver{}，本程式由 CHE_72 ZStudio 製作".format(program_zh, version))  # 輸出中文程式名稱、程式版本號、工作室名稱
     print("\033[38;5;208m本程式可用來協助您分析購買「TPASS 通勤月票」是否划算，並將結果儲存在 \"TPASS_Result.txt\" 中。\033[0m")  # 輸出中文程式目的
@@ -45,6 +45,8 @@ if __name__ == "__main__":
                     print(func_manual)  # 輸出「功能選擇平臺」簡易使用說明
                 case 1:  # 功能1：開始計算分析
                     Func.analyze(program_zh, version)
+                case 4:  # 功能4：隱藏的小彩蛋
+                    print("\033[38;5;201m恭喜您找到隱藏的小彩蛋，祝福您事事順心、萬事如意\033[0m")
                 case 6:  # 功能6：隱藏的小彩蛋
                     print("\033[38;5;201m恭喜您找到隱藏的小彩蛋，祝福您的生活六六大順\033[0m")
                 case 7:  # 功能7：顯示開源許可（英文原版）
@@ -74,4 +76,4 @@ if __name__ == "__main__":
                     print("\033[38;5;197m您的輸入內容出現錯誤，請檢查後重新輸入，現正返回「功能選擇平臺」\033[0m\a\n")  # 輸出提示訊息與通知聲音，讓使用者重新輸入
 else:  # 如果使用者誤將本程式作為模組引用
     print("\033[38;5;197m本程式為「中華民國（臺灣）TPASS 通勤月票計算程式」的主入口\n請直接運行 Main.py，而非透過其他模組引入本程式\033[0m\a\n")  # 輸出提示訊息提醒使用者正確使用方式
-    sys.exit(1)  # 呼叫系統正常結束本程式運行
+    sys.exit(1)  # 呼叫系統結束本程式運行，原因為"Operation not permitted"

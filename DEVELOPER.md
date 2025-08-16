@@ -37,4 +37,4 @@
 - `Studio.py`：存放簡短開源資訊與工作室 ASCII 藝術宣告
 
 ### 中華民國（臺灣）TPASS 通勤月票計算程式（Python），著作權所有 (C) 2025-現在 CHE_72 ZStudio  
-#### Taiwan TPASS Calculator (Python), Copytight (C) 2025-present CHE_72 ZStudio.  
+#### Taiwan TPASS Calculator (Python), Copyright (C) 2025-present CHE_72 ZStudio.  
