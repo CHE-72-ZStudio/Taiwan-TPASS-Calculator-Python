@@ -195,7 +195,7 @@ def analyze(program, ver):
                             price = 399
                         case 7:  # 南高屏月票7：高雄市公車暢遊 MeNGo（非 TPASS） $199
                             trans_list = ["輸入完成，開始計算", "高雄市 市區公車", "結束程式運行"]  # TODO 僅一種交通選擇，可以簡化
-                            price = 399
+                            price = 199
                 case 5:  # 城市5：北宜生活圈
                     plan, name = _plan_input(city, BY_plan)  # 呼叫 _plan_input() 函數取得月票方案與名稱，依序傳入生活圈編號與可用月票方案
                     match plan:
