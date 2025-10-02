@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # 定義 中／英 程式名稱、程式版本號，如果日後有需要更新時，更改此處即可避免缺失遺漏
     program_zh = "中華民國（臺灣）TPASS 通勤月票計算程式（Python）"
     program_en = "Taiwan TPASS Calculator (Python)"
-    version = "1.0.10"
+    version = "1.0.12"
 
     print("歡迎您使用「{}」Ver{}，本程式由 CHE_72 ZStudio 製作".format(program_zh, version))  # 輸出中文程式名稱、程式版本號、工作室名稱
     print("\033[38;5;208m本程式可用來協助您分析購買「TPASS 通勤月票」是否划算，並將結果儲存在 \"TPASS_Result.txt\" 中。\033[0m")  # 輸出中文程式目的

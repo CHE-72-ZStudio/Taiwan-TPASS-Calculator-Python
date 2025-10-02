@@ -8,6 +8,8 @@ Func.py
 * analyze：分析函數，本程式的核心分析邏輯部分
 """
 
+# TODO: Refactor: 將交通工具改用物件導向形式開發
+
 import sys
 import time
 
