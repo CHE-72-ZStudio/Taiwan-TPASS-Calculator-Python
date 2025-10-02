@@ -12,10 +12,10 @@
 
 ## 1. 環境需求
 - **作業系統**：
-    - Microsoft Windows 10+ 64位元（2004 以上版本）搭配 [Windows 終端機 (Windows Terminal)](https://aka.ms/terminal)
+    - Microsoft Windows 10+ 64位元（2004 以上版本）搭配 Microsoft 的 [Windows 終端機 (Windows Terminal)](https://aka.ms/terminal)
         - Windows 11+ 已預裝 Windows 終端機，無須另外安裝
-    - Apple macOS 搭配系統自帶的 終端機.app (Terminal.app)
-    - Linux 搭配 [KDE 的 Konsole](https://konsole.kde.org/download.html)
+    - Apple macOS 10.9+ 搭配系統自帶的 終端機.app (Terminal.app)
+    - Linux （建議搭配 [KDE 的 Konsole](https://konsole.kde.org/download.html)）
 
 
 ## 2. 安裝配置
@@ -76,6 +76,7 @@
 5. 輸入正確後程式會完成乘車數據的儲存，並回到「交通選擇平臺」詢問您是否要繼續輸入同一月票下，其他運輸工具的乘車數據
     - 若您選擇繼續輸入其他運輸工具的乘車數據，會回到第 2 步驟繼續選擇其他交通工具
     - 如果您已完成該月票方案所有對應乘車數據的輸入，想要查看最終的計算結果，請輸入 `0` 後按下 `Enter/Return` 按鍵
+      * 如果您的月票方案包含「臺北捷運+環狀線」、「臺灣鐵路」的交通運輸工具，則程式會自動根據其所對應的常客優惠方案，自動為您計算打折後的金額並顯示
       * 程式會在螢幕上顯示出您的乘車總次數與總金額、通勤花費總金額與是否推薦購買「TPASS 通勤月票」的參考建議，您可以根據自身情形做決定  
       * 程式同時會將當下的時間與最終的計算結果儲存在與主程式同資料夾下的 `TPASS_Result.txt` 中，方便您日後可以隨時查詢使用紀錄
 6. 這時程式會出現綠色提示後回到「都會選擇平臺」，您可以繼續進行不同生活圈、不同月票方案、不同乘車數據的分析；也可以選擇返回「功能選擇平臺」切換程式的其他功能，或是分析完成後可以直接依照指示輸入對應的半形數字後按下 `Enter/Return` 按鍵以結束程式  
