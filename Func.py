@@ -1,10 +1,8 @@
 """
 Func.py
-此模組提供分析、計算、輸出的相關功能，包含：
+此模組提供選擇與分析的相關功能，包含：
 
 * _plan_input：詢問使用者的「方案選擇平臺」，並回傳最終選擇的月票方案編號
-* check_input：檢查使用者輸入是否無效或超出範圍，並回傳輸入數值或拋出對應例外
-* print_list：遍歷印出列表，並顯示編號與頓號
 * analyze：分析函數，本程式的核心分析邏輯部分
 """
 
@@ -12,6 +10,9 @@ Func.py
 
 import sys
 import time
+
+from Trans import *
+from Util import *
 
 TPASS_city = ["顯示使用說明", "基北北桃生活圈", "桃竹竹苗生活圈", "中彰投苗生活圈", "南高屏生活圈", "北宜生活圈", "花蓮縣", "雲林縣",
               "澎湖縣", "臺東縣：臺東縣都市內 $299", "大嘉義生活圈：嘉義縣市跨城際 $399", "返回上層選單", "結束程式運行"]  # 城市選擇平臺
@@ -25,13 +26,6 @@ BY_plan = ["北宜跨城際及雙北 $2,300", "北北宜跨城際通勤 $1,800",
 HL_plan = ["花蓮縣都市內 $199", "花蓮縣都市內 含公路客運 $399"]  # 花蓮縣的方案選擇平臺
 YL_plan = ["雲林縣都市內 $199", "雲林縣都市內 含臺鐵跨區7站 $399"]  # 雲林縣的方案選擇平臺
 PH_plan = ["澎湖縣公車 $150", "澎湖縣車船 $400"]  # 澎湖縣的方案選擇平臺
-
-
-class RangeError(ValueError):
-    """
-    例外類別：當數值超出自訂義的合理範圍時拋出的自訂例外，繼承自內建的數值錯誤
-    """
-    pass
 
 
 if __name__ == "__main__":  # 如果使用者誤啟動本程式
@@ -61,49 +55,6 @@ def _plan_input(city, city_plan):
     name = city_plan[plan - 1]
     print("\n您選擇了 \033[38;5;43m{}\033[0m 當中的 \033[38;5;43m{}\033[0m 月票方案".format(TPASS_city[city], name))
     return plan, name
-
-
-def check_input(prompt, range_min=None, range_max=None):
-    """
-    公開函數：讀取使用者輸入的內容，轉換成整數並進行範圍驗證，在輸入無效或超出範圍時會拋出例外
-    由 Gemini Code Assist 提供建議，符合 DRY 原則
-
-    參數：
-        * prompt (str)：顯示給使用者的提示訊息
-        * range_min (int, optional)：範圍內允許出現的最小值
-        * range_max (int, optional)：範圍內允許出現的最大值
-
-    回傳：
-        * value (int)：通過驗證的整數輸入
-
-    拋出：
-        * ValueError：如果輸入無法轉換為整數時自動拋出的內建例外
-        * RangeError：如果輸入超出指定的範圍時手動拋出的自訂例外
-    """
-    value = int(input(prompt))  # 讀取使用者輸入後嘗試轉換成整數，若無法轉換會自動拋出 ValueError
-
-    # 如果有傳入 最小／最大值，則檢查使用者輸入是否超出範圍，若超出範圍會手動拋出自訂的 RangeError 例外，表示數值超出合理範圍
-    if range_min is not None and value < range_min:
-        raise RangeError
-    if range_max is not None and value > range_max:
-        raise RangeError
-
-    return value  # 回傳正確轉換成整數的數值
-
-
-def print_list(content_list, offset=0):  # TODO more Pythonic?
-    """
-    公開函數：用於遍歷印出列表，並能顯示中文頓號與輸入用箭頭
-
-    參數：
-        * content_list (list)：要被遍歷印出的列表資料
-        * offset (int, optional)：在印出數值時的偏移量，預設為 0 表示不偏移，「方案選擇平臺」為 1 以適應月票方案編號
-    """
-    for i in range(len(content_list)):
-        if i == len(content_list) - 1:  # 如果是列表中的最後一項
-            print("{}: {}\n".format(i + offset, content_list[i]), end='')  # 印出編號與列表文字
-        else:
-            print("\033[38;5;43m{}: {}".format(i + offset, content_list[i]), end='、')  # 印出編號與列表文字，以頓號分隔元素
 
 
 def analyze(program, ver):

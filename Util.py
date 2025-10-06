@@ -1,0 +1,57 @@
+"""
+Util.py
+此模組提供檢查、輸出的相關功能與自定義錯誤類別，避免 Func.py 與 Trans.py 出現循環引用的問題，包含：
+
++ RangeError：自訂例外類別，當數值超出自訂義的合理範圍時拋出。
+* check_input：檢查使用者輸入是否無效或超出範圍，並回傳輸入數值或拋出對應例外
+* print_list：遍歷印出列表，並顯示編號與頓號
+"""
+
+class RangeError(ValueError):
+    """
+    例外類別：當數值超出自定義的合理範圍時拋出的自訂例外，繼承自內建的數值錯誤
+    """
+    pass
+
+
+def check_input(prompt, range_min=None, range_max=None):
+    """
+    公開函數：讀取使用者輸入的內容，轉換成整數並進行範圍驗證，在輸入無效或超出範圍時會拋出例外
+    由 Gemini Code Assist 提供建議，符合 DRY 原則
+
+    參數：
+        * prompt (str)：顯示給使用者的提示訊息
+        * range_min (int, optional)：範圍內允許出現的最小值
+        * range_max (int, optional)：範圍內允許出現的最大值
+
+    回傳：
+        * value (int)：通過驗證的整數輸入
+
+    拋出：
+        * ValueError：如果輸入無法轉換為整數時自動拋出的內建例外
+        * RangeError：如果輸入超出指定的範圍時手動拋出的自訂例外
+    """
+    value = int(input(prompt))  # 讀取使用者輸入後嘗試轉換成整數，若無法轉換會自動拋出 ValueError
+
+    # 如果有傳入 最小／最大值，則檢查使用者輸入是否超出範圍，若超出範圍會手動拋出自訂的 RangeError 例外，表示數值超出合理範圍
+    if range_min is not None and value < range_min:
+        raise RangeError
+    if range_max is not None and value > range_max:
+        raise RangeError
+
+    return value  # 回傳正確轉換成整數的數值
+
+
+def print_list(content_list, offset=0):  # TODO more Pythonic?
+    """
+    公開函數：用於遍歷印出列表，並能顯示中文頓號與輸入用箭頭
+
+    參數：
+        * content_list (list)：要被遍歷印出的列表資料
+        * offset (int, optional)：在印出數值時的偏移量，預設為 0 表示不偏移，「方案選擇平臺」為 1 以適應月票方案編號
+    """
+    for i in range(len(content_list)):
+        if i == len(content_list) - 1:  # 如果是列表中的最後一項
+            print("{}: {}\n".format(i + offset, content_list[i]), end='')  # 印出編號與列表文字
+        else:
+            print("\033[38;5;43m{}: {}".format(i + offset, content_list[i]), end='、')  # 印出編號與列表文字，以頓號分隔元素

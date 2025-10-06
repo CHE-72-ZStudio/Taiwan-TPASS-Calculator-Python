@@ -7,6 +7,7 @@ import sys
 
 import Func
 from Studio import *
+from Util import *
 
 if __name__ == "__main__":
     # 定義 中／英 程式名稱、程式版本號，如果日後有需要更新時，更改此處即可避免缺失遺漏
