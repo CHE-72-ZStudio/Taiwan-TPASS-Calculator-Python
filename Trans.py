@@ -12,28 +12,40 @@ if __name__ == "__main__":  # 如果使用者誤啟動本程式
 class Transportation():
     # TODO: 所有交通工具的總類
     # TODO: 依據傳入名稱設定交通工具名稱
-    # TODO: 初始化時若為 True 且傳入 最小/最大 值，則使用「有檢查的數據輸入平臺」
-    # TODO: 初始化時若為 False，則使用「無檢查的數據輸入平臺」
-    # TODO: 實作通用的「無檢查的數據輸入平臺」邏輯
+    # TODO: 初始化時若傳入 最小/最大 值，則「數據輸入平臺」依據傳入值檢查，否則以 0~1000 為預設檢查範圍
+    def __init__(self, name, range_min=0, range_max=1000):
+        self.name = name
+        self.range_min = range_min
+        self.range_max = range_max
+
     # TODO: 實作通用的「有檢查的數據輸入平臺」邏輯
-    pass
+
+    # TODO: 實作「通用」的計算總金額邏輯
 
 
 class TaipeiMetro(Transportation):
     # TODO: 使用名稱 "臺北捷運+環狀線" 進行初始化
+    def __init__(self):
+        super().__init__("臺北捷運+環狀線")
+
     # TODO: 使用多態方式替代父類的「數據輸入平臺」邏輯
-    # TODO: 額外實作專屬的常客回饋方案
-    pass
+
+    # TODO: 實作「常客回饋方案」的計算總金額邏輯
 
 
 class TaipeiBus(Transportation):
     # TODO: 使用名稱 "大臺北地區 市區公車" 進行初始化
+    def __init__(self):
+        super().__init__("大臺北地區 市區公車")
+
     # TODO: 使用多態方式替代父類的「數據輸入平臺」邏輯
-    pass
 
 
 class TaiwanRailway(Transportation):
     # TODO: 傳入名稱 "臺灣鐵路（含 彰化/嘉義 跨區 7 站）" 時，使用傳入名稱，否則預設為 "臺灣鐵路"
+    def __init__(self, name="臺灣鐵路"):
+        super().__init__(name)
+
     # TODO: 使用父類的「有檢查的數據輸入平臺」邏輯
-    # TODO: 額外實作專屬的常客回饋方案
-    pass
+
+    # TODO: 實作「常客回饋方案」的計算總金額邏輯
