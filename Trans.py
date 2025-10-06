@@ -7,13 +7,12 @@ from Util import *
 
 
 if __name__ == "__main__":  # 如果使用者誤啟動本程式
-    print("\033[38;5;197m這是 Func.py 呼叫的類別模組\n請改為運行 Main.py，而非直接運行本程式\n我們即將結束此模組的運行\033[0m")  # 輸出提示訊息提醒使用者正確使用方式
+    print("\033[38;5;197m這是 Func.py 呼叫的交通類別模組\n請依照 README.md 的指示改為運行 Main.py，而非直接運行本程式\n我們即將結束此模組的運行\033[0m")  # 輸出提示訊息提醒使用者正確使用方式
     exit(1)  # 呼叫系統結束本程式運行，原因為"Operation not permitted"
 
 
 class Transportation():
-    # TODO: 所有交通工具的總類
-    # TODO: 依據傳入名稱設定交通工具名稱
+    # TODO: 所有交通工具的總類，依據傳入名稱設定交通工具名稱
     # TODO: 初始化時若傳入 最小/最大 值，則「數據輸入平臺」依據傳入值檢查，否則以 0~1000 為預設檢查範圍
     def __init__(self, name, range_min=0, range_max=1000):
         self.__name = name
@@ -24,7 +23,6 @@ class Transportation():
     def name(self):
         return self.__name
 
-    # TODO: 實作通用的「有檢查的數據輸入平臺」邏輯
     def query(self):
         print("\033[38;5;111m這裡是「數據輸入平臺」，請輸入您本月\033[38;5;43m「{}」\033[38;5;111m的搭乘數據\033[0m".format(self.__name))  # 輸出「數據輸入平臺」的提示訊息
         print("\033[38;5;208m如果您已完成本交通工具的輸入，請輸入半形數字 0 以回到「交通選擇平臺」\033[0m")
@@ -44,14 +42,12 @@ class Transportation():
         print("\033[38;5;45m程式已成功記下您本月共搭乘「{}」NT$ {:,}（{:,} 次）\033[0m".format(self.__name, self.__orignal, self.__times))  # 輸出小結與回應訊息
         print("\033[38;5;43m正在返回「交通選擇平臺」\033[0m\n")  # 輸出提示訊息
 
-    # TODO: 實作「通用」的計算總金額邏輯
     def calculate(self):
         self.__total = self.__orignal
         return self.__times, self.__total
 
 
 class TaipeiMetro(Transportation):
-    # TODO: 使用名稱 "臺北捷運+環狀線" 進行初始化
     def __init__(self):
         super().__init__("臺北捷運+環狀線")
 
@@ -85,7 +81,6 @@ class TaipeiMetro(Transportation):
 
 
 class TaipeiBus(Transportation):
-    # TODO: 使用名稱 "大臺北地區 市區公車" 進行初始化
     def __init__(self, price):
         super().__init__("大臺北地區 市區公車")
         self.__price = price
@@ -106,8 +101,7 @@ class TaiwanRailway(Transportation):
     def __init__(self, name="臺灣鐵路"):
         super().__init__(name)
 
-    # TODO: 使用父類的「有檢查的數據輸入平臺」邏輯
-    # TODO: 實作「常客回饋方案」的計算總金額邏輯
+    # TODO: 使用父類的「有檢查的數據輸入平臺」邏輯，實作「常客回饋方案」的計算總金額邏輯
     def query(self):
         super().query()
         # 計算 臺灣鐵路 的常客優惠價格後存入總金額位置，避免修改原始票價數值

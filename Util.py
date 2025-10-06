@@ -7,6 +7,12 @@ Util.py
 * print_list：遍歷印出列表，並顯示編號與頓號
 """
 
+
+if __name__ == "__main__":  # 如果使用者誤啟動本程式
+    print("\033[38;5;197m這是本程式運行所需的工具函式模組\n請依照 README.md 的指示改為運行 Main.py，而非直接運行本程式\n我們即將結束此模組的運行\033[0m")  # 輸出提示訊息提醒使用者正確使用方式
+    exit(1)  # 呼叫系統結束本程式運行，原因為"Operation not permitted"
+
+
 class RangeError(ValueError):
     """
     例外類別：當數值超出自定義的合理範圍時拋出的自訂例外，繼承自內建的數值錯誤
